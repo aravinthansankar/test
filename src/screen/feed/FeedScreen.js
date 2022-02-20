@@ -24,7 +24,7 @@ const FeedScreen = () => {
       </View>
 
       <View style={FeedScreenStyle.midContainer}>
-        <List style={styles.container} data={Feeds} keyExtractor={item => item.id.toString()}
+        <FlatList style={styles.container} data={Feeds} keyExtractor={item => item.id.toString()}
         renderItem={({item}) => (
           
            <Text>{item.list.title}</Text>
