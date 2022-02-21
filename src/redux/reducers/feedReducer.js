@@ -8,16 +8,15 @@ const initialState = {
 
 
 const feedReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case GET_Feed:
-            return { ...state, availableFeed:action.payload};
-        default:
-            return state;
 
- 
-      }
+    if (action.type=="GET_Feed") 
+    {   
+        return({
+           ...state,availableFeed:action.payload                  
+          }) 
+        }
+    return state;
 }
-
 export default feedReducer;
 
 

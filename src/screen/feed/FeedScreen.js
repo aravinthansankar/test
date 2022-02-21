@@ -6,17 +6,29 @@ import Inputfield from "../../components/Inputfield/Inputfield";
 import { List } from "@ui-kitten/components";
 import { useSelector, useDispatch } from 'react-redux';
 import * as feedActions from '../../redux/actions/feedActions'
+import {connect} from "react-redux";
+import { useNavigation , useRoute} from "@react-navigation/native"
 
 
-const FeedScreen = () => {
+const FeedScreen = props => {
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState();
-  const {Feeds} = useSelector(state => state.feedReducer);
  
+
+  const navigation = useNavigation();
+ 
+  const selectItemHandler = (id, title,description,embed_url) => {
+
+    navigation.navigate('InfoScreen',{
+      title:title,
+      Id:id,
+      Description:description,
+      Embed_url:embed_url,
+    })
+  };
 
   return (
     <SafeAreaView style={FeedScreenStyle.container}>
+      {console.log(props.pictures_arr)}
       <View style={FeedScreenStyle.topContainer}>
         <View style={FeedScreenStyle.inputLayout}>
           <Inputfield />
@@ -24,11 +36,20 @@ const FeedScreen = () => {
       </View>
 
       <View style={FeedScreenStyle.midContainer}>
-        <FlatList style={styles.container} data={Feeds} keyExtractor={item => item.id.toString()}
-        renderItem={({item}) => (
+        {props.pictures_arr.list?
+        <FlatList style={styles.container} data={props.pictures_arr.list} keyExtractor={item => item.id.toString()}
+       renderItem={({item}) => (
+          <InfoCard title={item.title} image={item.thumbnail_480_url}  onSelect={() => {
+            selectItemHandler(item.id, item.title, item.description, item.embed_url);
+          }}  />
           
-           <Text>{item.list.title}</Text>
-        )} />
+       )} />
+        :<View>
+
+
+        </View>
+
+        }
        
       </View>
     </SafeAreaView>
@@ -41,10 +62,37 @@ const styles = StyleSheet.create({
     height: 32,
   },
 });
-export default FeedScreen;
+const mapStateToProps = (state ) => {
+  return {
+  
+  pictures_arr:state.feedReducer.availableFeed
+  }
+}
+
+
+const mapDispatchToProps = dispatch => {
+  return {
+    // dispatching plain actions
+    
+  //   get_data_final: 
+  //  ()=>
+  //   dispatch(  get_data()),
+  
+  
+  
+  }}
+
+  export default connect(mapStateToProps,mapDispatchToProps)(FeedScreen)
 
 
 
+//   <ProductItem
+//   image={itemData.item.imageUrl}
+//   title={itemData.item.title}
+//   price={itemData.item.price}
+//   onSelect={() => {
+//     selectItemHandler(itemData.item.id, itemData.item.title);
+//   }}
+// >
 
-
-
+//title={item.title} description={item.description} image={item.thumbnail_480_url} duration={item.duration} 
