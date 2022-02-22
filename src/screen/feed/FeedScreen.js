@@ -85,14 +85,3 @@ const mapDispatchToProps = dispatch => {
   export default connect(mapStateToProps,mapDispatchToProps)(FeedScreen)
 
 
-
-//   <ProductItem
-//   image={itemData.item.imageUrl}
-//   title={itemData.item.title}
-//   price={itemData.item.price}
-//   onSelect={() => {
-//     selectItemHandler(itemData.item.id, itemData.item.title);
-//   }}
-// >
-
-//title={item.title} description={item.description} image={item.thumbnail_480_url} duration={item.duration} 

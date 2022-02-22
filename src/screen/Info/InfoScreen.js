@@ -1,66 +1,49 @@
-import { View, Text,Linking} from 'react-native'
-import { useRoute } from '@react-navigation/native';
-import { WebView } from 'react-native-webview';
-import React,{useState, useEffect} from 'react'
-import { Video, AVPlaybackStatus } from 'expo-av';
+import { View, Text, Linking, StyleSheet } from "react-native";
+import { useRoute } from "@react-navigation/native";
+import { WebView } from "react-native-webview";
+import React, { useState, useEffect } from "react";
+import { Video, AVPlaybackStatus } from "expo-av";
 
-
-
-const  InfoScreen = () => {
-  const route = useRoute()
-  const video = React.useRef(null);
-  const [status, setStatus] = React.useState({});
-
+const InfoScreen = () => {
+  const route = useRoute();
 
 
   return (
-    <View style={{flex:1}}>
-
-      
-      <View style={{flex:1, backgroundColor:'green'}}>
-      <Text>{route.params.Id}</Text>
-
+    <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: "green" }}>
+        <WebView
+          source={{ uri: route.params.Embed_url }}
+          originWhitelist={["https://*"]}
+          startInLoadingState={true}
+          renderLoading={() => <Text>Lodding</Text>}
+        />
       </View>
 
-      <View style={{flex:1, backgroundColor:'red'}}>
+      <View style={{ flex: 1, backgroundColor: "red" }}>
+        <Text>{route.params.title}</Text>
+       <Text>{route.params.Description}</Text>
+         
 
-     
-      {/* <WebView
-   source={{html: `<iframe width="100%" height="50%" originWhitelist=${route.params.Embed_url} frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`}}
-   style={{marginTop: 20, backgroundColor:'green'}}
-/> */}
-<WebView
-   source={{ uri: route.params.Embed_url }}
-   originWhitelist={['https://*']}
-   startInLoadingState={true}
-  renderLoading={() => <Text>Lodding</Text>}
-/>
       </View>
- 
     </View>
-  )
-}
-
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#ecf0f1',
+    justifyContent: "center",
+    backgroundColor: "#ecf0f1",
   },
   video: {
-    alignSelf: 'center',
+    alignSelf: "center",
     width: 320,
     height: 200,
   },
   buttons: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
-export default InfoScreen
-
-
-
-
+export default InfoScreen;

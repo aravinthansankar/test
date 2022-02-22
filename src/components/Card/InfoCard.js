@@ -8,30 +8,18 @@ import InfoCardStyle from "./InfoCardStyle";
 const Header = (title) => (
   <View>
     <Text category='h6'>{title}</Text>
-   
   </View>
 );
 
-const Footer = (props) => (
-  <View {...props} style={[props.style, styles.footerContainer]}>
- 
-    <Button
-      style={styles.footerControl}
-      size='small'>
-      Play
-    </Button>
-  </View>
-);
+
 
 const InfoCard = props => {
 
-
-  
   return(
   <React.Fragment>
   
 
-    <Card style={styles.card} header={Header(props.title)} footer={Footer} onPress={props.onSelect} useForeground>
+    <Card style={styles.card} header={Header(props.title)}  onPress={props.onSelect} useForeground>
       
       <Image
           style={styles.tinyLogo}
