@@ -11,7 +11,6 @@ const InfoCardStyle = StyleSheet.create({
     item: {
       marginVertical: 4,
     },
-    
   });
 
   export default InfoCardStyle

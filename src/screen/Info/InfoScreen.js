@@ -11,12 +11,21 @@ const InfoScreen = () => {
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1, backgroundColor: "green" }}>
+      {route.params.Embed_url  ?(
         <WebView
           source={{ uri: route.params.Embed_url }}
           originWhitelist={["https://*"]}
           startInLoadingState={true}
           renderLoading={() => <Text>Lodding</Text>}
         />
+
+      ):(
+
+        <View>
+          <Text> on voide </Text>
+        </View>
+      )}
+    
       </View>
 
       <View style={{ flex: 1, backgroundColor: "red" }}>

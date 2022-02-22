@@ -1,10 +1,10 @@
 import React from "react";
-import { TouchableWithoutFeedback, StyleSheet, View } from "react-native";
+import { TouchableWithoutFeedback, StyleSheet, View,Keyboard } from "react-native";
 import { Icon, Input, Text } from "@ui-kitten/components";
 import * as feedActions from '../../redux/actions/feedActions'
 import { useSelector, useDispatch } from 'react-redux';
 
-export const Inputfield = () => {
+export const Inputfield = (props) => {
   const [value, setValue] = React.useState("");
   const zoomIconRef = React.useRef();
 
@@ -12,7 +12,9 @@ export const Inputfield = () => {
 
   const search =() => {
     zoomIconRef.current.startAnimation()
-    dispatch(feedActions.fetchFeed(value));
+    props.parentCallback(value)
+    dispatch(feedActions.fetchFeed(value,1));
+    Keyboard.dismiss();
   }
 
   const renderIcon = (props) => (
@@ -34,12 +36,9 @@ export const Inputfield = () => {
       placeholder="Search"
       accessoryRight={renderIcon}
       onChangeText={(nextValue) => setValue(nextValue)}
+      onSubmitEditing ={search}
     />
   );
 };
 
 export default Inputfield;
-
-// onChangeText={(text) => {
-//   feedActions.fetchFeed(text);
-// }}

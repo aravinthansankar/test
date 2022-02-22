@@ -9,12 +9,24 @@ const initialState = {
 
 const feedReducer = (state = initialState, action) => {
 
-    if (action.type=="GET_Feed") 
+    if (action.type=="GET_Feed_2") 
+    // console.log("re>>>>>>>>>>>>>>",state);
     {   
+        
+        
         return({
-           ...state,availableFeed:action.payload                  
+           ...state,availableFeed:state.availableFeed.concat(action.payload)              
           }) 
         }
+        if (action.type=="GET_Feed") 
+        // console.log("re>>>>>>>>>>>>>>",state);
+        {   
+            
+            
+            return({
+               ...state,availableFeed:action.payload             
+              }) 
+            }
     return state;
 }
 export default feedReducer;
